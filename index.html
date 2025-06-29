@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>1 sat = CLP</title>
+<style>
+  body {
+    background:#111;
+    color:#0f0;
+    font-family: monospace;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+  }
+  #value {
+    font-size:4em;
+  }
+  #timestamp {
+    margin-top:1em;
+    font-size:1em;
+    color:#888;
+  }
+</style>
+</head>
+<body>
+<div id="value">Cargando...</div>
+<div id="timestamp"></div>
+<script>
+async function fetchSat(){
+  try {
+    const res = await fetch('https://api.yadio.io/exrates/btc');
+    const data = await res.json();
+    const priceCLP = data.BTC.CLP;
+    const sat = priceCLP / 100000000;
+    document.getElementById('value').textContent = sat.toLocaleString('es-CL',{style:'currency',currency:'CLP'});
+    document.getElementById('timestamp').textContent = new Date().toLocaleTimeString('es-CL');
+  } catch(e){
+    document.getElementById('value').textContent = 'Error';
+  }
+}
+fetchSat();
+setInterval(fetchSat, 30000);
+</script>
+</body>
+</html>
