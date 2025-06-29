@@ -35,6 +35,7 @@ async function fetchSat(){
     const data = await res.json();
     const priceCLP = data.BTC.CLP;
     const sat = priceCLP / 100000000;
+
     const num = sat.toLocaleString('es-CL', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
