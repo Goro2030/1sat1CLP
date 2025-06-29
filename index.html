@@ -15,6 +15,18 @@
     height:100vh;
     margin:0;
   }
+  #hero {
+    margin-bottom:0.5em;
+    font-size:1.5em;
+  }
+  #hero a {
+    color:#0f0;
+    text-decoration:none;
+  }
+  #desc {
+    margin-bottom:2em;
+    text-align:center;
+  }
   #value {
     font-size:4em;
   }
@@ -26,6 +38,8 @@
 </style>
 </head>
 <body>
+<h1 id="hero"><a href="https://achicrip.org" target="_blank">Asociaci\u00f3n Chilena de Criptotecnolog\u00edas</a></h1>
+<p id="desc">Esta p\u00e1gina muestra el valor de 1 satoshi en pesos chilenos, actualizado cada 30 segundos.</p>
 <div id="value">Cargando...</div>
 <div id="timestamp"></div>
 <script>
@@ -37,8 +51,8 @@ async function fetchSat(){
     const sat = priceCLP / 100000000;
 
     const num = sat.toLocaleString('es-CL', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3
     });
     document.getElementById('value').textContent =
       `1 satoshi = ${num} pesos chilenos`;
