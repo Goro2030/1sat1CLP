@@ -35,7 +35,13 @@ async function fetchSat(){
     const data = await res.json();
     const priceCLP = data.BTC.CLP;
     const sat = priceCLP / 100000000;
-    document.getElementById('value').textContent = sat.toLocaleString('es-CL',{style:'currency',currency:'CLP'});
+
+    const num = sat.toLocaleString('es-CL', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    document.getElementById('value').textContent =
+      `1 satoshi = ${num} pesos chilenos`;
     document.getElementById('timestamp').textContent = new Date().toLocaleTimeString('es-CL');
   } catch(e){
     document.getElementById('value').textContent = 'Error';
