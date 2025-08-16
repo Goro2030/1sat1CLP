@@ -2,8 +2,12 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>1 sat = CLP</title>
 <style>
+  html {
+    font-size: clamp(16px, 4vw, 24px);
+  }
   body {
     background:#111;
     color:#0f0;
@@ -30,9 +34,11 @@
   #illustration {
     margin-bottom:1em;
     width:200px;
+    max-width:80%;
+    height:auto;
   }
   #value {
-    font-size:4em;
+    font-size: clamp(2rem, 8vw, 4rem);
   }
   #timestamp {
     margin-top:1em;
