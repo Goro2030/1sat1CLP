@@ -1,91 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>1 sat = CLP</title>
-<style>
-  html {
-    font-size: clamp(16px, 4vw, 24px);
-  }
-  body {
-    background:#111;
-    color:#0f0;
-    font-family: monospace;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    margin:0;
-  }
-  #hero {
-    margin-bottom:0.5em;
-    font-size:1.5em;
-  }
-  #hero a {
-    color:#0f0;
-    text-decoration:none;
-  }
-  #desc {
-    margin-bottom:2em;
-    text-align:center;
-  }
-  #illustration {
-    margin-bottom:1em;
-    width:200px;
-    max-width:80%;
-    height:auto;
-  }
-  #value {
-    font-size: clamp(2rem, 8vw, 4rem);
-  }
-  #timestamp {
-    margin-top:1em;
-    font-size:1em;
-    color:#888;
-  }
-  #footer {
-    margin-top:2em;
-    font-size:0.8em;
-    color:#888;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>1 satoshi en CLP</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      min-height: 100dvh;            /* iOS-safe */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, sans-serif;
+      background: #0b0b0b;
+      color: #fff;
+    }
+    main { width: min(720px, 100%); text-align: center; }
+    h1 { font-size: clamp(24px, 3.2vw, 32px); margin: 0 0 12px; font-weight: 700; }
+    .valor { font-size: clamp(44px, 12vw, 112px); line-height: 1.1; font-weight: 800; margin: 8px 0; letter-spacing: .5px; }
+    p, a, small { display: block; margin: .5rem auto; }
+    a { text-decoration: none; font-weight: 600; }
+    a:link, a:visited { color: #8bd3ff; }
+    a:hover { text-decoration: underline; }
+    img, svg, canvas { max-width: 100%; height: auto; display: block; margin: 1rem auto; }
+  </style>
 </head>
 <body>
-<h1 id="hero"><a href="https://achicrip.org" target="_blank">Asociación Chilena de Criptotecnologías</a></h1>
-<p id="desc">Esta página muestra el valor de 1 satoshi en pesos chilenos, actualizado cada 30 segundos.</p>
-<img id="illustration" src="img/bitcoin_aplasta_peso.png" alt="Bitcoin aplastando a un peso chileno" />
-<div id="value">Cargando...</div>
-<div id="timestamp"></div>
-<p style="text-align:center; margin-top:12px; font-size:clamp(18px,2.2vw,28px);">
-  <a href="https://achicrip.org/bitcoin-en-5-minutos/" target="_blank" rel="noopener" style="color:#39ff14; text-decoration:underline;">
-    ¿Qué es un satoshi? Aprendé Bitcoin en 5 minutos →
-  </a>
-</p>
+  <main>
+    <h1>1 satoshi en pesos chilenos (CLP)</h1>
+    <div class="valor" id="valor">Cargando…</div>
 
-<footer id="footer">© 2025 goro2030 para Achicrip. Este software es <a href="https://github.com/goro2030/1sat1CLP" target="_blank">open source en GitHub</a>.</footer>
-<script>
-async function fetchSat(){
-  try {
-    const res = await fetch('https://api.yadio.io/exrates/btc');
-    const data = await res.json();
-    const priceCLP = data.BTC.CLP;
-    const sat = priceCLP / 100000000;
+    <p><a href="https://achicrip.org/bitcoin-en-5-minutos/" rel="noopener">¿Qué es un satoshi?</a></p>
+    <small id="timestamp">Actualizado: —</small>
+  </main>
 
-    const num = sat.toLocaleString('es-CL', {
-      minimumFractionDigits: 3,
-      maximumFractionDigits: 3
-    });
-    document.getElementById('value').textContent =
-      `1 satoshi = ${num} pesos chilenos`;
-    document.getElementById('timestamp').textContent = new Date().toLocaleTimeString('es-CL');
-  } catch(e){
-    document.getElementById('value').textContent = 'Error';
-  }
-}
-fetchSat();
-setInterval(fetchSat, 30000);
-</script>
+  <!-- Mantener/ajustar el JS actual que escribe #valor y #timestamp -->
+  <script src="./script.js"></script>
 </body>
 </html>
